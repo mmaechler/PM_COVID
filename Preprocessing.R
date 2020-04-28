@@ -37,16 +37,16 @@ county_base_mortality$older_pecent = county_base_mortality$older_Population/coun
 state_test = merge(state_test,statecode,by.x = "state" ,by.y = "Code" )
 
 # pm average over 17 years
-county_pm_aggregated = county_pm %>% 
-  group_by(fips) %>% 
+county_pm_aggregated = county_pm %>%
+  group_by(fips) %>%
   summarise(mean_pm25 = mean(pm25))
 # pm most recent 2016
 #county_pm_aggregated = subset(county_pm , year==2016)
 #county_pm_aggregated$mean_pm25 = county_pm_aggregated$pm25
 
 # pm average over 17 years
-county_temp_aggregated = county_temp %>% 
-  group_by(fips) %>% 
+county_temp_aggregated = county_temp %>%
+  group_by(fips) %>%
   summarise(mean_winter_temp= mean(winter_tmmx),
             mean_summer_temp= mean(summer_tmmx),
             mean_winter_rm= mean(winter_rmax),
@@ -90,4 +90,6 @@ aggregate_pm_census_cdc_test = aggregate_pm_census_cdc_test %>%
 
 aggregate_pm_census_cdc_test_beds = merge(aggregate_pm_census_cdc_test,county_hospitals_aggregated,by.x = "fips",by.y = "COUNTYFIPS",all.x = T)
 
+if(FALSE) ## MM:
+ save(list = ls(pattern = "^[a-z]"), file = "preproc_data.rda")
 
